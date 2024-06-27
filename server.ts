@@ -9,7 +9,6 @@ import { endpoints } from "./server/logic/endpoints";
 
 ((app) => {
   app.listen(80, async () => {
-
     const isProduction = process.env.NODE_ENV === "production";
     const base = process.env.BASE || "/";
     const ABORT_DELAY = 10000;
@@ -43,7 +42,7 @@ import { endpoints } from "./server/logic/endpoints";
       .use(cors())
       .use("/api/auth", authMiddleware)
       .use("/api/crud", crudMiddleware(endpoints));
-   
+
     app.get("/", async (req, res) => {
       try {
         const url = req.originalUrl.replace(base, "");

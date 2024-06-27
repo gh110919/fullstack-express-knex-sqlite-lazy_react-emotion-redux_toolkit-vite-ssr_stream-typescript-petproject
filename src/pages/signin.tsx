@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { PageContainer } from "ENTITIES/page-container";
+import { PageContainer } from "../entities/page-container";
 import { ptw } from "SHARED/pixel-recalculate";
 import { useDispatch_, useSelector_ } from "SHARED/store";
 import { TAuthState, authSlice } from "SHARED/store/slices/auth";
