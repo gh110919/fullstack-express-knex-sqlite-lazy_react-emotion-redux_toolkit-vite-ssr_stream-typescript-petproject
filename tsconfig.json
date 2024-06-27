@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "baseUrl": "./",
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "CommonJS",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "#/*": ["public/*"],
+      "@/*": ["src"],
+      "APP/*": ["src/client/app/*"],
+      "ENTITIES/*": ["src/client/entities/*"],
+      "FEATURES/*": ["src/client/features/*"],
+      "PAGES/*": ["src/client/pages/*"],
+      "PROCESSES/*": ["src/client/processes/*"],
+      "SHARED/*": ["src/shared/*"],
+      "WIDGETS/*": ["src/widgets/*"]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "allowJs": true,
+    "esModuleInterop": true
+  },
+  "include": ["src"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
