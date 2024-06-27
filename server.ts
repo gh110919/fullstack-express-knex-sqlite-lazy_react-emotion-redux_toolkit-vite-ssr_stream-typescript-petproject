@@ -6,6 +6,7 @@ import { ViteDevServer } from "vite";
 import { authMiddleware } from "./server/auth/authMiddleware";
 import { crudMiddleware } from "./server/logic/crud-middleware";
 import { endpoints } from "./server/logic/endpoints";
+// import { helmetContext } from "./src/entry-client";
 
 ((app) => {
   app.listen(80, async () => {
@@ -85,7 +86,15 @@ import { endpoints } from "./server/logic/endpoints";
               },
             });
 
-            const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
+            // const { helmet } = helmetContext as any;
+
+            // const link = helmet.link.toString();
+            // const meta = helmet.meta.toString();
+            // const title = helmet.title.toString();
+
+            const [htmlStart, htmlEnd] = template
+              // .replace(`<!--app-head-->`, link + meta + title)
+              .split(`<!--app-html-->`);
 
             res.write(htmlStart);
 

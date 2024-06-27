@@ -22,4 +22,7 @@ export default defineConfig({
       WIDGETS: resolve(__dirname, "./src/widgets"),
     },
   },
+  ssr: {
+    noExternal: ["react-helmet-async"],
+  },
 });

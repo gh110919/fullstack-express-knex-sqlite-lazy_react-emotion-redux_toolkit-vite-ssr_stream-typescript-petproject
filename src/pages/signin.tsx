@@ -5,6 +5,7 @@ import { useDispatch_, useSelector_ } from "SHARED/store";
 import { TAuthState, authSlice } from "SHARED/store/slices/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Form = styled.form`
   width: ${ptw(320)};
@@ -160,6 +161,10 @@ export const Signin = ({
 
   return (
     <PageContainer>
+      <Helmet>
+        <title>Войти</title>
+      </Helmet>
+
       <Form onClick={() => navigate("/watch/select_sport")}>
         <Title>{title} </Title>
         <Fieldset>
