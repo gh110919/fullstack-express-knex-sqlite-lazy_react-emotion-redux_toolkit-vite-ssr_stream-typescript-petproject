@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { PageContainer } from "../entities/page-container";
+import { PageContainer } from "ENTITIES/page-container";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 import { ptw } from "SHARED/pixel-recalculate";
 import { useDispatch_, useSelector_ } from "SHARED/store";
 import { TAuthState, authSlice } from "SHARED/store/slices/auth";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 
 const Form = styled.form`
   width: ${ptw(320)};

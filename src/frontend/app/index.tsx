@@ -1,9 +1,9 @@
 import { Global, css } from "@emotion/react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { Signin } from "../pages/signin";
-import { Layout } from "../processes/layout";
-import { NotFound } from "../processes/not-found";
+import { Signin } from "PAGES/signin";
+import { Layout } from "PROCESSES/layout";
+import { NotFound } from "PROCESSES/not-found";
+import { HelmetProvider, Helmet } from "react-helmet-async";
+import { useLocation, Routes, Route } from "react-router-dom";
 
 export default function App() {
   const location = useLocation();
@@ -32,7 +32,15 @@ export default function App() {
       <Routes location={location}>
         <Route path="*" element={<NotFound></NotFound>}></Route>
         <Route path="/" element={<Layout></Layout>}>
-          <Route index element={<Signin></Signin>}></Route>
+          <Route
+            index
+            element={
+              <a href="/signin" style={{ fontSize:"3rem", color: "white" }}>
+                go to signin
+              </a>
+            }
+          ></Route>
+          <Route path="/signin" element={<Signin></Signin>}></Route>
         </Route>
       </Routes>
     </HelmetProvider>

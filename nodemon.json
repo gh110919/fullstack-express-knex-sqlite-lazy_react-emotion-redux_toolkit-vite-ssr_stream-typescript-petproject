@@ -1,5 +1,5 @@
 {
-  "exec": "npm run prod",
+  "exec": "npm run dev",
   "ext": "js,ts,jsx,tsx,json,html",
   "ignore": [
     "**/dist/*",

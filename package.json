@@ -26,7 +26,6 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
-    "@types/node": "^20.14.9",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
@@ -37,13 +36,18 @@
   "name": "fullstack-express-knex-sqlite-react-emotion-redux_toolkit-vite-ssr-typescript-petproject",
   "private": true,
   "scripts": {
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:client && npm run build:server && npm run build:backend",
+    "build:backend": "vite build --ssr src/backend --outDir dist/backend",
     "build:client": "vite build --ssrManifest --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-    "dev": "ts-node server",
+    "build:server": "vite build --ssr src/frontend/entry-server.tsx --outDir dist/server",
+    "dev": "ts-node server.ts",
     "devmon": "nodemon",
-    "preview": "cross-env NODE_ENV=production node server",
-    "prod": "npm run build && npm run dev"
+    "docker-compose:build": "docker-compose build",
+    "docker:build": "docker build -t production-build .",
+    "docker:images": "docker images",
+    "docker:run": "docker run -d production-build",
+    "docker:work": "npm run docker:build && npm run docker:run",
+    "preview": "cross-env NODE_ENV=production node server"
   },
   "type": "commonjs",
   "version": "0.0.0"

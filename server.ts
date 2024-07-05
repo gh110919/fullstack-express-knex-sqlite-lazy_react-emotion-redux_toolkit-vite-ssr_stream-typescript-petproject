@@ -1,13 +1,22 @@
 import cors from "cors";
 import express, { json } from "express";
-import { readFile } from "fs/promises";
-import { Transform } from "stream";
+import { readFile } from "node:fs/promises";
+import { Transform } from "node:stream";
 import { ViteDevServer } from "vite";
-import { authMiddleware } from "./server/auth/authMiddleware";
-import { crudMiddleware } from "./server/logic/crud-middleware";
-import { endpoints } from "./server/logic/endpoints";
+import { authMiddleware } from "./src/backend/auth/authMiddleware";
+import { crudMiddleware } from "./src/backend/logic/crud-middleware";
+import { endpoints } from "./src/backend/logic/endpoints";
 
 ((app) => {
+  app.listen(3000, () => {
+    app
+      .use(json())
+      .use(cors())
+      .set("trust proxy", "linklocal")
+      .use("/api/auth", authMiddleware)
+      .use("/api/crud", crudMiddleware(endpoints));
+  });
+
   app.listen(80, async () => {
     const isProduction = process.env.NODE_ENV === "production";
     const base = process.env.BASE || "/";
@@ -36,14 +45,7 @@ import { endpoints } from "./server/logic/endpoints";
       app.use(base, sirv("./dist/client", { extensions: [] }));
     }
 
-    app
-      .use(json())
-      .set("trust proxy", "linklocal")
-      .use(cors())
-      .use("/api/auth", authMiddleware)
-      .use("/api/crud", crudMiddleware(endpoints));
-
-    app.get("/", async (req, res) => {
+    app.use("*", async (req, res) => {
       try {
         const url = req.originalUrl.replace(base, "");
 
@@ -60,10 +62,11 @@ import { endpoints } from "./server/logic/endpoints";
         if (!isProduction) {
           template = await readFile("./index.html", "utf-8");
           template = await vite.transformIndexHtml(url, template);
-          render = (await vite.ssrLoadModule("/src/entry-server.tsx")).render;
+          render = (await vite.ssrLoadModule("/src/frontend/entry-server.tsx"))
+            .render;
         } else {
           template = templateHtml;
-          render = (await import("./src/entry-server")).render;
+          render = (await import("./src/frontend/entry-server")).render;
         }
 
         let didError = false;

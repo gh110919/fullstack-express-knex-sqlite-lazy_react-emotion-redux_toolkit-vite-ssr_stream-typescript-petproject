@@ -4,7 +4,7 @@ import {
   type RenderToPipeableStreamOptions,
 } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { content } from "./entry-client.tsx";
+import { content } from "./entry-client";
 import { writeFileSync } from "fs";
 
 export function render(
